@@ -1,74 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>JS + CSS Clock</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>JS + CSS Clock</title>
+    </head>
+
+    <body>
+
+        <!-- Sacramento Clock -->
+        <div class="sac clock">
+            <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+            </div>
+        </div>
+
+        <!-- Denver Clock -->
 
 
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
-    </div>
+        <!-- Austin Clock -->
 
 
-  <style>
-    html {
-      background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=5);
-      background-size: cover;
-      font-family: 'helvetica neue';
-      text-align: center;
-      font-size: 10px;
-    }
-
-    body {
-      margin: 0;
-      font-size: 2rem;
-      display: flex;
-      flex: 1;
-      min-height: 100vh;
-      align-items: center;
-    }
-
-    .clock {
-      width: 30rem;
-      height: 30rem;
-      border: 20px solid white;
-      border-radius: 50%;
-      margin: 50px auto;
-      position: relative;
-      padding: 2rem;
-      box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
-        inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .clock-face {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
-    }
-
-    .hand {
-      width: 50%;
-      height: 6px;
-      background: black;
-      position: absolute;
-      top: 50%;
-    }
-
-  </style>
-
-  <script>
+        <!-- New York Clock -->
 
 
-  </script>
-</body>
+        <!-- England Clock -->
+
+
+        <!-- Hong Kong Clock -->
+
+        <style>
+
+            html {
+                background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=5);
+                background-size: cover;
+                font-family: 'helvetica neue';
+                text-align: center;
+                font-size: 10px;
+            }
+
+            body {
+                margin: 0;
+                font-size: 2rem;
+                display: flex;
+                flex: 1;
+                min-height: 100vh;
+                align-items: center;
+            }
+
+            .clock {
+                width: 30rem;
+                height: 30rem;
+                border: 20px solid white;
+                border-radius: 50%;
+                margin: 50px auto;
+                position: relative;
+                padding: 2rem;
+                box-shadow:
+                    0 0 0 4px rgba(0,0,0,0.1),
+                    inset 0 0 0 3px #EFEFEF,
+                    inset 0 0 10px black,
+                    0 0 10px rgba(0,0,0,0.2);
+            }
+
+            .clock-face {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transform: translateY(-3px); /* account for the height of the clock hands */
+            }
+
+            .hand {
+                width: 50%;
+                height: 6px;
+                background: black;
+                position: absolute;
+                top: 50%;
+                transform-origin: 100%;
+                transform: rotate(90deg);
+                transition: all 0.05s;
+                transition-timing-function: cubic-bezier(0.1,3.0,0.5,1);
+            }
+
+            .min-hand{
+                width: 45%;
+                right:50%;
+                top: 51%;
+            }
+
+            .hour-hand{
+                width: 40%;
+                right: 50%;
+                top: 51%;
+            }
+
+            .reset-hand{
+                transition: all 0s;
+            }
+
+        </style>
+
+        <script>
+
+            // Get Elements (Hours, Minutes, Seconds)
+            const secondHand = document.querySelector('.second-hand');
+            const minuteHand = document.querySelector('.min-hand');
+            const hourHand = document.querySelector('.hour-hand');
+            
+            function setDate(){
+                
+                // Get current date/time
+                const now = new Date();
+
+                // Get current seconds
+                const seconds = now.getSeconds();
+                const secondsDegrees = ((seconds / 60) * 360) + 90;
+                // Check if seconds is resetting
+                resetTransitionCheck(secondsDegrees, secondHand);
+                secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+                // Get current minute
+                const minutes = now.getMinutes();
+                const minutesDegrees = ((minutes / 60) * 360) + 90;
+                // Check if minutes is resetting
+                resetTransitionCheck(minutesDegrees, minuteHand);
+                minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+
+                // Get current hour
+                const hours = now.getHours();
+                const hoursDegrees = ((hours / 12) * 360) + 90;
+                // Check if hours is resetting
+                resetTransitionCheck(hoursDegrees, hourHand);
+                hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+            }
+
+            setInterval(setDate, 1000);
+
+            // Check if hand is resetting and remove transition for reset (to prevent weird transition)
+            function resetTransitionCheck(val, el){
+                if(val == 90){
+                    el.classList.add('reset-hand');
+                    console.log('Remove Transition for reset!');
+                }
+                else{
+                    el.classList.remove('reset-hand');
+                }
+            }
+
+        </script>
+        
+    </body>
+
 </html>
