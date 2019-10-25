@@ -10,4 +10,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 
 * **Lesson 1**: JavaScript Drum Kit [COMPLETE]
 * **Lesson 2**: JS + CSS Clock [COMPLETE]
-  * Going to add more to this one including multiple clocks and possibly weather
+  * v1.1 - added timezone functionality with dropdown (preset time zones for now)
