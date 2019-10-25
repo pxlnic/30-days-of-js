@@ -7,7 +7,34 @@
 
     <body>
 
-        <!-- Sacramento Clock -->
+        <!-- Select Location -->
+        <select id='location' onchange="getTimeZone()">
+            <option value='Pacific/Honolulu'>
+                Pacific/Honolulu
+            </option>
+            <option value='America/Los_Angeles'>
+                America/Los_Angeles
+            </option>
+            <option>
+                America/Denver
+            </option>
+            <option>
+                America/Chicago
+            </option>
+            <option>
+                America/New_York
+            </option>
+            <option>
+                Europe/London
+            </option>
+            <option>
+                Europe/Berlin
+            </option>
+                Asia/Tokyo
+            </option>
+        </select>
+
+        <!-- Clock -->
         <div class="sac clock">
             <div class="clock-face">
                 <div class="hand hour-hand"></div>
@@ -44,9 +71,11 @@
                 margin: 0;
                 font-size: 2rem;
                 display: flex;
+                flex-direction: column;
                 flex: 1;
                 min-height: 100vh;
                 align-items: center;
+                justify-content: center;
             }
 
             .clock {
@@ -107,11 +136,14 @@
             const secondHand = document.querySelector('.second-hand');
             const minuteHand = document.querySelector('.min-hand');
             const hourHand = document.querySelector('.hour-hand');
+            var timeOffset = 0;
             
             function setDate(){
                 
                 // Get current date/time
                 const now = new Date();
+
+                const offset = (now.getTimezoneOffset()/60) + timeOffset;
 
                 // Get current seconds
                 const seconds = now.getSeconds();
@@ -128,7 +160,8 @@
                 minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 
                 // Get current hour
-                const hours = now.getHours();
+                const hours = now.getHours() + offset;
+                console.log(`Current hour: ${hours}`)
                 const hoursDegrees = ((hours / 12) * 360) + 90;
                 // Check if hours is resetting
                 resetTransitionCheck(hoursDegrees, hourHand);
@@ -142,12 +175,58 @@
             function resetTransitionCheck(val, el){
                 if(val == 90){
                     el.classList.add('reset-hand');
-                    console.log('Remove Transition for reset!');
+                    // console.log('Remove Transition for reset!');
                 }
                 else{
                     el.classList.remove('reset-hand');
                 }
             }
+
+            // Get Location from Drop Down
+            const locEl = document.querySelector('#location')
+            locEl.addEventListener('change', getTimeZone());
+
+            // Get Time Zone List
+            function getTimeZone(){
+
+                const apiKey = '4BB78JQKUR0L';
+                const loc = document.querySelector('#location').value;
+
+                fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=zone&zone=${loc}`).then((res) => {
+
+                    if(res.status !== 200){
+                        console.log(`There was a problem. Status Code: ${res.status}`);
+                        return;
+                    }
+                    
+                    res.json().then((data) => {
+
+                        timeOffset = data.gmtOffset / 3600;
+
+                    });
+
+                }).catch((err) => {
+                    
+                    console.log('Failure!', err)
+
+                });
+
+            }
+
+            getTimeZone();
+
+            /*
+
+                Pacific/Honolulu
+                America/Los_Angeles
+                America/Denver
+                America/Chicago
+                America/New_York
+                Europe/London
+                Europe/Berlin
+                Asia/Tokyo
+
+            */
 
         </script>
         
