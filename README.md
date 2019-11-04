@@ -15,3 +15,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 4**: Array Cardio [COMPLETE]
 * **Lesson 5**: Flex Panel Gallery [COMPLETE]
 * **Lesson 6**: Ajax Type Ahead [COMPLETE]
+* **Lesson 7**: Array Cardio Day 2 [COMPLETE]
