@@ -7,6 +7,81 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+
+  // Variables for canvas and context
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.strokeStyle = '#BADA55';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 100;
+
+  // Look this up for more 'PhotoShop' functionality
+  ctx.globalCompositeOperation = 'multiply';
+
+  // Flags, position, and color
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0;
+  let direction = true;
+
+  // Draw function
+  function draw(e){
+    // If 'isDrawing' if false exit function
+    if(!isDrawing) return //stops function from running when not moused down
+
+    // Set stroke color
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`
+
+    ctx.beginPath();
+    // Start from
+    ctx.moveTo(lastX, lastY);
+
+    // Go to
+    ctx.lineTo(e.offsetX, e.offsetY);
+
+    // Draw the 'stroke'
+    ctx.stroke();
+
+    // Set last position of line
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+
+    // Update stroke color
+    hue++
+    if(hue >= 360){
+      hue = 0;
+    }
+
+    // Check 'lineWidth' and flip direction if is maxed or minned out
+    if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1){
+      direction = !direction;
+    }
+
+    // Increase or decrase 'lineWidth' based on direction
+    if(direction){
+      ctx.lineWidth++;
+    }else{
+      ctx.lineWidth--;
+    }
+    
+  }
+
+  // Set 'isDrawing' to true on mousedown
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+
+  // Run "Draw" when mouse is moving
+  canvas.addEventListener('mousemove', draw);
+
+  // Set 'isDrawing' to false on these even
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+
 </script>
 
 <style>
