@@ -16,3 +16,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 5**: Flex Panel Gallery [COMPLETE]
 * **Lesson 6**: Ajax Type Ahead [COMPLETE]
 * **Lesson 7**: Array Cardio Day 2 [COMPLETE]
+* **Lesson 8**: Fun with HTML5 Canvas [COMPLETE]
