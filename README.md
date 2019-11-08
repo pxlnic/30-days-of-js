@@ -18,3 +18,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 7**: Array Cardio Day 2 [COMPLETE]
 * **Lesson 8**: Fun with HTML5 Canvas [COMPLETE]
 * **Lesson 9**: Must Know Dev Tools Tricks [COMPLETE]
+* **Lesson 10**: Hold Shift Key to Check Multiple Checkboxes [COMPLETE]
