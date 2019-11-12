@@ -7,6 +7,27 @@
 </head>
 <body>
 <script>
+  console.clear();
+
+  const pressed = [];
+  // const secretCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftba';
+  const secretCode = 'uuddlrlrbas';
+
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key)
+    pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
+
+    console.log(`Keys Pressed: ${pressed.join('')}`);
+
+    // console.log(`Keys: ${pressed.join('')} || Secret Code: ${secretCode}`);
+
+    if(pressed.join('').includes(secretCode)){
+      console.log('You entered the secret ... Konami Code!!!')
+      cornify_add();
+    }
+
+  })
+
 </script>
 </body>
 </html>
