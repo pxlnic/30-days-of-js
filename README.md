@@ -22,3 +22,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 11**: Custom HTML5 Video Player [COMPLETE]
 * **Lesson 12**: Key Sequence Detection [COMPLETE]
 * **Lesson 13**: Slide in on Scroll [COMPLETE]
+* **Lesson 14**: Arrays & Objects - Reference vs Copy [COMPLETE]
