@@ -8,13 +8,30 @@
 
   <script>
     // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log('Making a copy of a variable: ',age, age2, 'This is a reference');
+
+    age = 200;
+    console.log('Updating the original item does not change the copy: ',age, age2, 'These are just simple "numbers" though');
+
+    let name = 'Wes';
+    let name2 = name;
+    console.log(name, name2);
+
+    name = 'Wesly';
+    console.log('Same things with a string: ',name, name2);
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+    const team = players;
+    console.log('Array and a "reference" to the array',players, team);
 
     // You might think we can just do something like this:
+    team[3] = 'Lux';
+    console.log('Updating the reference updates the original: ',players, team, 'This is a problem if you dont want to change the original data');
 
     // however what happens when we update that array?
 
@@ -25,12 +42,22 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
+    const team2 = players.slice();
+    team2[3] = 'Lux';
 
     // one way
 
     // or create a new array and concat the old one in
+    const team3 = [].concat(players);
+    team3[2] = 'Falcon'
 
     // or use the new ES6 Spread
+    const team4 = [...players];
+    team4[3] = 'Yoyoyo';
+    
+    const team5 = Array.from(players);
+    team5[0] = 'Howdy Pardner!';
+    console.log('Making Copies', players, team, team2, team3, team4, team5, 'This was done using "slice", "concat", the ES6 Spread, and "Array.from". Notice the original players array is kept intact');
 
     // now when we update it, the original one isn't changed
 
@@ -41,14 +68,41 @@
       name: 'Wes Bos',
       age: 80
     };
+    console.log('Original Person Object: ',person)
 
     // and think we make a copy:
+    const captain = person;
+    person.number = 75;
+    console.log('Person Object Reference and assignment of new property: ',person, captain);
 
     // how do we take a copy instead?
+    const cap2 = Object.assign({}, person, {number: 75});
+    console.log('Person Oject copy and copying Object data: ',person, cap2, 'This was done using the "Object.assign" function');
 
     // We will hopefully soon see the object ...spread
+    const cap3 = {...person}
+    console.log('Person Object copy using the ES6 spread:',cap3, 'This now works with Objects as well as arrays');
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const wes = {
+      name: 'wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    }
+    console.log('Original "wes" Object:',wes);
+
+    const dev = Object.assign({}, wes);
+    dev.name = 'Wesley';
+    dev.social.twitter = '@coolman';
+    console.log('wes Object copy and assignment of "nested" Object property using the "Object.assin" function:', wes, dev, 'The nested Object is a referece because "Object.assign" only goes one layer deep')
+
+    const dev2 = JSON.parse(JSON.stringify(wes));
+    dev2.social.twitter = '@coolman';
+
+    console.log('wes and dev2 Objects: ',wes, dev2, 'dev2 was created using "JSON.stringify" and then "JSON.parse" to turn the entire Object into a string and then re-parse it as an Object.')
 
   </script>
 
