@@ -23,12 +23,119 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <div class="update-all">
+      <input id="reset" type="submit" value="Reset All">
+      <input id="check-all" type="submit" value="Check All">
+      <input id="uncheck-all" type="submit" value="Uncheck All">
+    </div>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
+
+  // Reset Button
+  const reset = document.querySelector('input#reset')
+
+  // Check All Button
+  const checkAll = document.querySelector('input#check-all')
+
+  // Uncheck All Button
+  const uncheckAll = document.querySelector('input#uncheck-all')
+
+  // Add Item to List Function
+  function addItem(e){
+    // Prevents page from reloading
+    e.preventDefault();
+
+    // Grab item input being listened to
+    const text = (this.querySelector('[name=item]')).value;
+
+    // Create item Object
+    const item = {
+      text,
+      done: false
+    }
+
+    // Add 'item' to 'items' array
+    items.push(item)
+
+    // Populate 'itemsList'
+    populateList(items, itemsList);
+
+    // Add 'items' array to localStorage
+    localStorage.setItem('items', JSON.stringify(items))
+
+    // Reset input
+    this.reset();
+  }
+
+  // Populate List Function
+  function populateList(plates = [], platesList){
+    
+    platesList.innerHTML = plates.map((plate, i) => {
+
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}/>
+          <label for="item${i}">${plate.text}</label> 
+        </li>
+      `;
+
+    }).join('');
+
+  }
+
+  // Toggle 'don' state
+  function toggleDone(e){
+    if(!e.target.matches('input')) return;
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  // Reset All
+  function resetList(){
+    console.log('Reset List!')
+    localStorage.removeItem('items');
+    items.splice(0,items.length);
+    populateList(items, itemsList);
+  }
+
+  // Check All
+  function checkAllItems(){
+    items.forEach(item => {
+      item.done = true;
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  // Uncheck All
+  function unCheckAllItems(){
+    items.forEach(item => {
+    item.done = false;
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  // Hook Event Listeners to form
+  addItems.addEventListener('submit', addItem);
+  // Hook Event Listener to the 'plates' list
+  itemsList.addEventListener('click', toggleDone)
+  // Reset Button EventListener
+  reset.addEventListener('click', resetList)
+  // Check All Button EventListener
+  checkAll.addEventListener('click', checkAllItems)
+  // Un-Check All Button EventListener
+  uncheckAll.addEventListener('click', unCheckAllItems)
+
+  // Populate List when page loads
+  populateList(items, itemsList);
 
 </script>
 
