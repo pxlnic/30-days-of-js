@@ -50,6 +50,10 @@ const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'N
 const articles = ["The", "An", "A"];
 // const bandsList = document.querySelector('#bands');
 
+console.log(`Original List:`);
+console.log(bands);
+console.log('<<-- Sorted List on the page.')
+
 function strip(bandName){
   return bandName.replace(/^(a |the |an )/i, '').trim()
 }
