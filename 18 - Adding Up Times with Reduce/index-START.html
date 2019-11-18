@@ -182,6 +182,43 @@
     </li>
   </ul>
 <script>
+
+  // Time Nodes
+  const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+  console.log('Array of all the "data-time" attributes from all video nodes:');
+  console.log(timeNodes);
+
+  // Conver Time Nodes to seconds
+  const seconds = timeNodes
+    // Map each node to the "data-time" attribute
+    .map(node => node.dataset.time)
+    // Map "data-time" to mins and secs by splitting the text at ":" and parsing the result into "floats"
+    .map(timeCode => {
+      const [mins, secs] = timeCode.split(':').map(parseFloat);
+      return (mins * 60) + secs;
+    })
+    // Reduce that array of "timeCodes" to the total number of seconds
+    .reduce((total, vidSeconds) => total + vidSeconds);
+
+  // Convert Seconds to '#h #m #s'
+  let secondsLeft = seconds;
+  console.log(`Total # of seconds after the node list has been reduced: ${secondsLeft}`);
+  const hours = Math.floor(secondsLeft / 3600);
+  console.log(`Total # of hours from those seconds: ${hours}`);
+  secondsLeft = secondsLeft % 3600;
+  console.log(`Seconds left after pulling hours out: ${secondsLeft}`);
+
+  const mins = Math.floor(secondsLeft/60);
+  console.log(`Minutes pulled from the remaining seconds: ${mins}`);
+  secondsLeft = secondsLeft % 60;
+  console.log(`Seconds left after pulling minuts out: ${secondsLeft}`);
+
+  const totalTime = `${hours}h ${mins}m ${secondsLeft}s`;
+
+  console.log(`Total time in '#h #m #s' format: ${totalTime}`);
+
+  console.log('This was completed by taking the timeNodes array and using a combo of map/reduce to turn those time strings into the total number of seconds in each video.')
+
 </script>
 </body>
 </html>
