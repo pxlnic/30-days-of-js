@@ -27,3 +27,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 16**: Mouse Move Shadow [COMPLETE]
 * **Lesson 17**: Sort Without Articles [COMPLETE]
 * **Lesson 18**: Adding Up Times with Reduce [COMPLETE}
+* **Lesson 19**: Webcam Fun [COMPLETE]
