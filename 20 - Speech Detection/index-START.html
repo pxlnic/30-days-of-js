@@ -10,8 +10,59 @@
   </div>
 
 <script>
+  function debounce(func, wait = 200, immediate = true) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+        var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+  // recognition.interimResults = true;
+
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+  recognition.addEventListener('result', e => {
+    const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('');
+
+    p.textContent = transcript;
+    if(e.results[0].isFinal){
+      p = document.createElement('p');
+      words.appendChild(p)
+    }
+
+    // Check for "get" requests
+    if(transcript.includes('Jarvis')){
+      console.log('Jarvis booting up!')
+      if(transcript.includes('get')){
+        if(transcript.includes('the weather')){
+          console.log('[Jarvis]: Getting the weather sir!');
+        } else if(transcript.includes('the traffic')){
+          console.log('[Jarvis]: Let me check the transportation system for that request sir!')
+        }
+      }
+    }
+    // console.log(transcript);
+  });
+
+  recognition.addEventListener('end', debounce(recognition.start));
+
+  recognition.start();
 
 </script>
 
