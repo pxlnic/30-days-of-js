@@ -26,5 +26,8 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 15**: localStorage [COMPLETE]
 * **Lesson 16**: Mouse Move Shadow [COMPLETE]
 * **Lesson 17**: Sort Without Articles [COMPLETE]
-* **Lesson 18**: Adding Up Times with Reduce [COMPLETE}
+* **Lesson 18**: Adding Up Times with Reduce [COMPLETE]
 * **Lesson 19**: Webcam Fun [COMPLETE]
+* **Lesson 20**: Speech Detection [COMPLETE]
+* **Lesson 21**: Gelocation [COMPLETE]
+* **Lesson 22**: Follow Along Link Highlighter [COMPLETE]
