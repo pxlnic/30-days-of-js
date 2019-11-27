@@ -32,3 +32,7 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
   * Added simple 'if' statements to initiate "Jarvis" and "get" commands
 * **Lesson 21**: Gelocation [COMPLETE]
 * **Lesson 22**: Follow Along Link Highlighter [COMPLETE]
+* **Lesson 23**: Speech Synthesis [COMPLETE]
+* **Lesson 24**: Sticky Nav [COMPLETE]
+* **Lesson 25**: Event Capture, Propagation, Bubbling, and Once [COMPLETE]
+* **Lesson 26**: Stripe Follow Along Nav [COMPLETE]
