@@ -220,6 +220,50 @@
 </style>
 
 <script>
+
+  const triggers = document.querySelectorAll('.cool > li');
+  const background = document.querySelector('.dropdownBackground');
+  const nav = document.querySelector('.top');
+
+  function handleEnter(){
+    console.log('Entering trigger!');
+    // Add trigger-enter classes
+    this.classList.add('trigger-enter');
+    setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+    // Add open class to background
+    background.classList.add('open');
+    // Get dropdown of current link item
+    const dropdown = this.querySelector('.dropdown');
+    // Get dropdown coordinates
+    const dropdownCoords = dropdown.getBoundingClientRect();
+    // Get nav coords
+    const navCoords = nav.getBoundingClientRect();
+    // Set coords
+    const coords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left
+    };
+    background.style.setProperty('width', coords.width + 'px');
+    background.style.setProperty('height', coords.height + 'px');
+    background.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px`);
+    console.log(coords)
+  }
+
+  function handleLeave(){
+    console.log('Leaving trigger!');
+    // Remove trigger-enter classes
+    setTimeout(() => this.classList.remove('trigger-enter-active'), 150)
+    this.classList.remove('trigger-enter');
+    // Remove open class on background
+    background.classList.remove('open');
+  }
+
+  // Handle trigger event listeners
+  triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+  triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave))
+
 </script>
 
 </body>
