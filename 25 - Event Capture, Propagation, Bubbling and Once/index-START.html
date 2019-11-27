@@ -13,6 +13,8 @@
     </div>
   </div>
 
+  <button class='btn'>Click Me</button>
+
 <style>
   html {
     box-sizing: border-box;
@@ -40,8 +42,27 @@
   }
 </style>
 
-<button></button>
 <script>
+
+  const divs = document.querySelectorAll('div');
+  const btn = document.querySelector('.btn')
+
+  function logText(e){
+    console.log(this.classList.value);
+    // e.stopPropagation(); //stop bubbling up
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, //set to true and will fire on the way "down" to the clicked element
+    //once: true // Runs one time and then removes the event listener
+  }));
+
+  btn.addEventListener('click', () => {
+    console.log('Button Clicked: ' + btn.classList.value)
+  }, 
+  {
+    once: true
+  })
 
 </script>
 </body>
