@@ -36,3 +36,7 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 24**: Sticky Nav [COMPLETE]
 * **Lesson 25**: Event Capture, Propagation, Bubbling, and Once [COMPLETE]
 * **Lesson 26**: Stripe Follow Along Nav [COMPLETE]
+* **Lesson 27**: Click & Drag [COMPLETE]
+* **Lesson 28**: Video Speed Controller [COMPLETE]
+* **Lesson 29**: Countdown Timer [COMPLETE]
+  * Added a 15-second warning flash (Orange) and a Time Up flash (Red)
