@@ -40,3 +40,5 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
 * **Lesson 28**: Video Speed Controller [COMPLETE]
 * **Lesson 29**: Countdown Timer [COMPLETE]
   * Added a 15-second warning flash (Orange) and a Time Up flash (Red)
+* **Lesson 30**: Wack-a-Mole [COMPLETE]
+  * Added levels (5), leaderboard (shows highest score), and game over condition (3 lives)
