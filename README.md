@@ -42,3 +42,4 @@ The course can be found at the [JavaScript 30 website](https://javascript30.com/
   * Added a 15-second warning flash (Orange) and a Time Up flash (Red)
 * **Lesson 30**: Wack-a-Mole [COMPLETE]
   * Added levels (5), leaderboard (shows highest score), and game over condition (3 lives)
+  * - BUG: After level one when round starts multple moles 'peep'. I have not been able to ID the cause, but I believe it to be related to the timout.
